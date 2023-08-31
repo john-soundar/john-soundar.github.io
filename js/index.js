@@ -1,40 +1,85 @@
-$(document).ready(function () {
+var	$parent = $("#main"),
+		$aside = $("#aside"),
+		$asideTarget = $aside.find(".aside--details"),
+		$asideClose = $aside.find(".close"),
+		$tilesParent = $(".tiles-a"),
+		$tiles = $tilesParent.find("a"),
+		slideClass = "show-detail";
 
-	//hide all descriptions
-	$('.description').hide();
+		// tile click
+		$tiles.on("click", function(e){
+			e.preventDefault();
+			e.stopPropagation();
+			if(!$("html").hasClass(slideClass)){
+				$tiles.removeClass("active");
+				$(this).addClass("active");
+				$(this).attr("aria-expanded","true");
+				loadTileData($(this));
+			}else{
+				killAside();
+				$(this).attr("aria-expanded","false");
+			}
+		});
 
-	function showFullHeight() {
+		// kill aside
+		$asideClose.on("click", function(e){
+			e.preventDefault();
+			killAside();
+		});
 
-	   $('.gallery li').each(function() {
+		// load data to aside
+		function loadTileData(target){
+			var $this = $(target),
+					itemHtml = $this.find(".details").html();
+					$asideTarget.html(itemHtml);
+					showAside();
+		}
 
-	   	$(this).find('.btn').click(function(e){
+		// show/hide aside
+		function showAside(){
+			if(!$("html").hasClass(slideClass)){
+				$("html").toggleClass(slideClass);
+				$aside.attr("aria-hidden","false");
+				focusCloseButton();
+			}
+		}
+		
+		// handle esc key
+		window.addEventListener("keyup", function(e){
 
-	   	console.log('Botão clicado');
-	  	
-	  	e.preventDefault();
+			// grab key pressed
+			var code = (e.keyCode ? e.keyCode : e.which);
+			
+			// escape
+			if(code === 27){
+				killAside();
+			}
 
-	  	 //NO MATTER WHAT WE CLOSE ALL OPEN SLIDES
-		 	$('.description').slideUp('normal');
+		}, false);
 
-	     //IF THE NEXT SLIDE WASN'T OPEN THEN OPEN IT
-			if($(this).next().is(':hidden') == true) {
-				
-				//ADD THE ON CLASS TO THE BUTTON
-				$(this).addClass('on');
-				  
-				//OPEN THE SLIDE
-				$(this).next().slideDown('normal');
+		// kill aside
+		function killAside(){
+			if($("html").hasClass(slideClass)){
+				$("html").removeClass(slideClass);
+				sendFocusBack();
+				$aside.attr("aria-hidden","true");
+				$tiles.attr("aria-expanded","false");
+			}
+		}
 
+		// send focus to close button
+		function focusCloseButton(){
+			$asideClose.focus();	
+		}
 
+		// send focus back to item that triggered event
+		function sendFocusBack(){
+			$(".active").focus();
+		}
 
-			 } 
-	        
-	   }); //click
-	  });//each
-	}//function
-
-
-	//load the function when the doc is ready		
-  showFullHeight();
-  
-});
+		// handle body click to close off-canvas
+		$parent.on("click",function(e){
+			if($("html").hasClass(slideClass)){
+				killAside();
+			}
+		});

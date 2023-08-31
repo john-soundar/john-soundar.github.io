@@ -1,125 +1,100 @@
-@import url(http://fonts.googleapis.com/css?family=Lustria|Lato:300);
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font: inherit;
-  font-size: 100%;
-  vertical-align: baseline;
-}
-
-html {
-  line-height: 1;
-}
-
-ol, ul {
-  list-style: none;
-}
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-caption, th, td {
-  text-align: left;
-  font-weight: normal;
-  vertical-align: middle;
-}
-
-q, blockquote {
-  quotes: none;
-}
-q:before, q:after, blockquote:before, blockquote:after {
-  content: "";
-  content: none;
-}
-
-a img {
-  border: none;
-}
-
-article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
-  display: block;
+* {
+  box-sizing: boder-box;
 }
 
 body {
-  overflow-x: hidden;
+  margin: 0;
 }
 
-ul {
+#main {
+  position: relative;
+  z-index: 20;
+  background: #fff;
+  -webkit-transition: -webkit-transform .6s ease;
+  transition: -webkit-transform .6s ease;
+  transition: transform .6s ease;
+  transition: transform .6s ease, -webkit-transform .6s ease;
+}
+@media (min-width: 640px) {
+  #main {
+    padding: 1em;
+  }
+}
+
+.fake-section {
+  background: #eee;
+  height: 300px;
+}
+
+.tiles-a {
   width: 100%;
+  position: relative;
   overflow: hidden;
 }
-ul li {
-  position: relative;
-  cursor: pointer;
+.tiles-a ul {
+  margin: 0;
+  padding: 0;
 }
-ul li .overlay {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
-  opacity: 0.4;
-  background: #000;
-  display: blocK;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  position: absolute;
-  z-index: 8;
+.tiles-a li {
+  list-style: none;
 }
-ul li .info {
-  position: relative;
-  width: 100%;
-  z-index: 999;
-  color: #fff;
+@media (min-width: 640px) {
+  .tiles-a li {
+    float: left;
+    width: 33.33%;
+  }
+}
+.tiles-a a {
+  margin: 1em;
   display: block;
-  text-align: center;
-  padding: 30px 20px 20px;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+  background: #222;
+  padding-top: 73%;
+  height: 0;
 }
-ul li .info h2 {
-  font-family: "Lustria", serif;
-  font-size: 30px;
-  line-height: 50px;
-}
-ul li .info p {
-  font-family: "Lato", sans-serif;
-  font-size: 18px;
-  line-height: 30px;
-  padding-bottom: 20px;
-}
-ul li .info .btn {
-  line-height: 30px;
-  display: inline-block;
-  padding: 0 10px;
-  border: 1px solid #fff;
-  font-size: 14px;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: #fff;
-  font-family: "Lato", sans-serif;
-  margin-bottom: 20px;
-}
-ul li .info .description {
-  display: none;
-}
-ul li .bg-img img {
-  position: absolute;
+
+#aside {
+  position: fixed;
   top: 0;
-  min-width: 100%;
-  min-height: 100%;
+  right: 0;
+  width: 60%;
+  height: 100%;
+  background: #eee;
+  overflow-y: scroll;
+  z-index: 10;
+}
+#aside img {
+  width: 100%;
+  height: auto;
+  vertical-align: top;
+}
+#aside .wrapper {
+  padding: 1em;
+}
+#aside .close {
+  width: 25px;
+  display: block;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+}
+
+.show-detail {
+  overflow: hidden;
+}
+.show-detail #main {
+  -webkit-transform: translateX(-60%);
+          transform: translateX(-60%);
+}
+
+.visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
 }

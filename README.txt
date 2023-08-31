@@ -1,3 +1,3 @@
-A Pen created at CodePen.io. You can find this one at http://codepen.io/miukimiu/pen/KmzfG.
+A Pen created at CodePen.io. You can find this one at http://codepen.io/joe-watkins/pen/RPZbrW.
 
- Just a full width Vertical Gallery / Content with a toggle description. 
+ Accessible grid style gallery with off-canvas image details prototype with focus management and keyboard support.
